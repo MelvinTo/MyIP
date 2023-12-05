@@ -1,6 +1,10 @@
 import textCN from "../contents/lang_cn.js";
 import textEN from "../contents/lang_en.js";
 import connectivityTests from "../contents/connectivityTests.js";
+import ipConnectivityTests from "../contents/ipConnectivityTests.js";
+import adblockTests from "../contents/adblock.js";
+import securityTests from "../contents/security.js";
+import pornTests from "../contents/porn.js";
 import stunServers from "../contents/stunServers.js";
 import ipDataCards from "../contents/ipDataCards.js";
 import leakTest from "../contents/leakTest.js";
@@ -9,7 +13,7 @@ new Vue({
   el: "#app",
   data: {
     // Enter your Bing Maps API key here
-    bingMapAPIKEY: "",
+    bingMapAPIKEY: "AlEUT9FiYklMDFtWCOyne2oWaOoucCz0Wjg8Z8FVg_GdR1olo97_YGAszZ8fo5J5",
     currentLanguage: "en",
     currentTexts: {},
 
@@ -31,6 +35,10 @@ new Vue({
 
     // from contents
     connectivityTests,
+    ipConnectivityTests,
+    adblockTests,
+    securityTests,
+    pornTests,
     originconnectivityTests: {},
     ipDataCards,
     originipDataCards: {},
@@ -267,7 +275,7 @@ new Vue({
 
       img.onerror = () => {
         clearTimeout(timeout);
-        test.status = this.currentTexts.connectivit.StatusUnavailable;
+        test.status = this.currentTexts.connectivity.StatusUnavailable;
         if (test.id === "google") {
           this.alertStyle = "text-danger";
           this.alertMessage = this.currentTexts.alert.OhNo_Message;
@@ -279,9 +287,103 @@ new Vue({
       img.src = `${test.url}${Date.now()}`;
     },
 
+    checkIPConnectivityHandler(test) {
+      const beginTime = +new Date();
+      test.status = this.currentTexts.ipConnectivity.checking;
+
+      fetch(`https://${test.ip}`, {mode: 'no-cors'})
+        .then((response) => response.text())
+        .then((data) => {
+          test.status =
+            this.currentTexts.ipConnectivity.StatusAvailable +
+            ` ( ${+new Date() - beginTime} ms )`;
+        })
+        .catch((error) => {
+          console.error("Error fetching IP from Cloudflare:", error);
+          test.status = this.currentTexts.ipConnectivity.StatusUnavailable;
+        });
+
+    },
+
+    checkAdblockHandler(test) {
+      const beginTime = +new Date();
+      test.status = this.currentTexts.adblock.checking;
+
+      fetch(test.url, {mode: 'no-cors'})
+        .then((response) => response.text())
+        .then((data) => {
+          test.status =
+            this.currentTexts.adblock.StatusAvailable +
+            ` ( ${+new Date() - beginTime} ms )`;
+        })
+        .catch((error) => {
+          console.error("Error fetching adblock :", error);
+          test.status = this.currentTexts.adblock.StatusUnavailable;
+        });
+
+    },
+
+    checkSecurityHandler(test) {
+      const beginTime = +new Date();
+      test.status = this.currentTexts.security.checking;
+
+      fetch(test.url, {mode: 'no-cors'})
+        .then((response) => response.text())
+        .then((data) => {
+          test.status =
+            this.currentTexts.security.StatusAvailable +
+            ` ( ${+new Date() - beginTime} ms )`;
+        })
+        .catch((error) => {
+          console.error("Error fetching security :", error);
+          test.status = this.currentTexts.security.StatusUnavailable;
+        });
+
+    },
+
+    checkPornHandler(test) {
+      const beginTime = +new Date();
+      test.status = this.currentTexts.porn.checking;
+
+      fetch(test.url, {mode: 'no-cors'})
+        .then((response) => response.text())
+        .then((data) => {
+          test.status =
+            this.currentTexts.porn.StatusAvailable +
+            ` ( ${+new Date() - beginTime} ms )`;
+        })
+        .catch((error) => {
+          console.error("Error fetching porn :", error);
+          test.status = this.currentTexts.porn.StatusUnavailable;
+        });
+
+    },
+
     checkAllConnectivity() {
       connectivityTests.forEach((test) => {
         this.checkConnectivityHandler(test);
+      });
+    },
+
+    checkAllIPConnectivity() {
+      ipConnectivityTests.forEach((test) => {
+        this.checkIPConnectivityHandler(test);
+      });
+    },
+
+    checkAllAdBlock() {
+      adblockTests.forEach((test) => {
+        this.checkAdblockHandler(test);
+      });
+    },
+    checkAllSecurity() {
+      securityTests.forEach((test) => {
+        this.checkSecurityHandler(test);
+      });
+    },
+    checkAllPorn() {
+      pornTests.forEach((test) => {
+        this.checkPornHandler(test);
       });
     },
     showToast() {
@@ -405,15 +507,15 @@ new Vue({
 
     generate32DigitString() {
       const unixTime = Date.now().toString(); // 13 位 Unix 时间戳
-      const fixedString = "jason5ng32"; // 固定字符串
+      const fixedString = "melvinto32"; // 固定字符串
       const randomString = Math.random().toString(36).substring(2, 11); // 随机 9 位字符串
 
       return unixTime + fixedString + randomString; // 拼接字符串
     },
 
     generate14DigitString() {
-      const fixedString = "jn32"; // 固定字符串
-      const randomString = Math.random().toString(36).substring(2, 11); // 随机 9 位字符串
+      const fixedString = "melvinto"; // 固定字符串
+      const randomString = Math.random().toString(36).substring(2, 7); // 随机 9 位字符串
 
       return fixedString + randomString; // 拼接字符串
     },
@@ -484,6 +586,14 @@ new Vue({
         this.fetchLeakTestIpApiCom(1);
       }, 1000);
 
+      // setTimeout(() => {
+      //   this.fetchLeakTestIpApiCom(2);
+      // }, 100);
+
+      // setTimeout(() => {
+      //   this.fetchLeakTestIpApiCom(3);
+      // }, 1000);
+
       setTimeout(() => {
         this.fetchLeakTestSfSharkCom(2, 0);
       }, 100);
@@ -541,6 +651,18 @@ new Vue({
     langPatch() {
       connectivityTests.forEach((test) => {
         test.status = this.currentTexts.connectivity.StatusWait;
+      });
+      ipConnectivityTests.forEach((test) => {
+        test.status = this.currentTexts.ipConnectivity.StatusWait;
+      });
+      adblockTests.forEach((test) => {
+        test.status = this.currentTexts.adblock.StatusWait;
+      });
+      pornTests.forEach((test) => {
+        test.status = this.currentTexts.porn.StatusWait;
+      });
+      securityTests.forEach((test) => {
+        test.status = this.currentTexts.security.StatusWait;
       });
       this.stunServers.forEach((server) => {
         server.ip = this.currentTexts.webrtc.StatusWait;
@@ -691,6 +813,18 @@ new Vue({
     setTimeout(() => {
       this.checkAllConnectivity();
     }, 6000);
+    setTimeout(() => {
+      this.checkAllIPConnectivity();
+    }, 7000);
+    setTimeout(() => {
+      this.checkAllAdBlock();
+    }, 9000);
+    setTimeout(() => {
+      this.checkAllSecurity();
+    }, 9000);
+    setTimeout(() => {
+      this.checkAllPorn();
+    }, 9000);
     setTimeout(() => {
       this.isInfosLoaded = true;
     }, 6500);

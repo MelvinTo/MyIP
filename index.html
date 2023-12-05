@@ -196,6 +196,114 @@
           </div>
         </div>
 
+        <!-- IP Connectivity -->
+        <div class="availability-test-section mb-4">
+          <div class="jn-title2">
+            <h2 id="scrollspyHeading2" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.ipConnectivity.Title}}</h2>
+            <button @click="checkAllIPConnectivity"
+              :class="['btn', isDarkMode ? 'btn-dark dark-mode-refresh' : 'btn-light']"><i
+                class="bi bi-arrow-clockwise"></i></button>
+          </div>
+          <div class="text-secondary">
+            <p>{{currentTexts.ipConnectivity.Note}}</p>
+          </div>
+          <div class="row">
+            <div v-for="test in ipConnectivityTests" :key="test.id" class="col-6 col-md-3 mb-4">
+              <div class="card jn-card" :class="{ 'dark-mode dark-mode-border': isDarkMode }">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="bi" :class="'bi-'+test.icon"></i> {{ test.name }}</h5>
+
+                  <p class="card-text"
+                    :class="{'text-info': test.status === currentTexts.ipConnectivity.StatusWait, 'text-success': test.status.includes(currentTexts.ipConnectivity.StatusAvailable), 'text-danger': test.status === currentTexts.ipConnectivity.StatusUnavailable || test.status === currentTexts.ipConnectivity.StatusTimeout}"
+                    v-html="test.status">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AdBlock -->
+        <div class="availability-test-section mb-4">
+          <div class="jn-title2">
+            <h2 id="scrollspyHeading2" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.adblock.Title}}</h2>
+            <button @click="checkAllAdBlock"
+              :class="['btn', isDarkMode ? 'btn-dark dark-mode-refresh' : 'btn-light']"><i
+                class="bi bi-arrow-clockwise"></i></button>
+          </div>
+          <div class="text-secondary">
+            <p>{{currentTexts.adblock.Note}}</p>
+          </div>
+          <div class="row">
+            <div v-for="test in adblockTests" :key="test.id" class="col-6 col-md-3 mb-4">
+              <div class="card jn-card" :class="{ 'dark-mode dark-mode-border': isDarkMode }">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="bi" :class="'bi-'+test.icon"></i> {{ test.name }}</h5>
+
+                  <p class="card-text"
+                    :class="{'text-info': test.status === currentTexts.adblock.StatusWait, 'text-success': test.status.includes(currentTexts.adblock.StatusAvailable), 'text-danger': test.status === currentTexts.adblock.StatusUnavailable || test.status === currentTexts.adblock.StatusTimeout}"
+                    v-html="test.status">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Porn -->
+        <div class="availability-test-section mb-4">
+          <div class="jn-title2">
+            <h2 id="scrollspyHeading2" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.porn.Title}}</h2>
+            <button @click="checkAllPorn"
+              :class="['btn', isDarkMode ? 'btn-dark dark-mode-refresh' : 'btn-light']"><i
+                class="bi bi-arrow-clockwise"></i></button>
+          </div>
+          <div class="text-secondary">
+            <p>{{currentTexts.porn.Note}}</p>
+          </div>
+          <div class="row">
+            <div v-for="test in pornTests" :key="test.id" class="col-6 col-md-3 mb-4">
+              <div class="card jn-card" :class="{ 'dark-mode dark-mode-border': isDarkMode }">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="bi" :class="'bi-'+test.icon"></i> {{ test.name }}</h5>
+
+                  <p class="card-text"
+                    :class="{'text-info': test.status === currentTexts.porn.StatusWait, 'text-success': test.status.includes(currentTexts.porn.StatusAvailable), 'text-danger': test.status === currentTexts.porn.StatusUnavailable || test.status === currentTexts.porn.StatusTimeout}"
+                    v-html="test.status">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security -->
+        <div class="availability-test-section mb-4">
+          <div class="jn-title2">
+            <h2 id="scrollspyHeading2" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.security.Title}}</h2>
+            <button @click="checkAllSecurity"
+              :class="['btn', isDarkMode ? 'btn-dark dark-mode-refresh' : 'btn-light']"><i
+                class="bi bi-arrow-clockwise"></i></button>
+          </div>
+          <div class="text-secondary">
+            <p>{{currentTexts.security.Note}}</p>
+          </div>
+          <div class="row">
+            <div v-for="test in securityTests" :key="test.id" class="col-6 col-md-3 mb-4">
+              <div class="card jn-card" :class="{ 'dark-mode dark-mode-border': isDarkMode }">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="bi" :class="'bi-'+test.icon"></i> {{ test.name }}</h5>
+
+                  <p class="card-text"
+                    :class="{'text-info': test.status === currentTexts.security.StatusWait, 'text-success': test.status.includes(currentTexts.security.StatusAvailable), 'text-danger': test.status === currentTexts.security.StatusUnavailable || test.status === currentTexts.security.StatusTimeout}"
+                    v-html="test.status">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- WebRTC Test -->
         <div class="webrtc-test-section mb-4">
           <div class="jn-title2">
