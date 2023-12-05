@@ -46,6 +46,14 @@
           <a class="nav-link" :class="{ 'text-white jn-deactive': isDarkMode }"
             href="#scrollspyHeading2">{{currentTexts.nav.Connectivity}}</a>
           <a class="nav-link" :class="{ 'text-white jn-deactive': isDarkMode }"
+            href="#scrollspyHeading5">{{currentTexts.nav.IPConnectivity}}</a>
+          <a class="nav-link" :class="{ 'text-white jn-deactive': isDarkMode }"
+            href="#scrollspyHeading6">{{currentTexts.nav.Adblock}}</a>
+          <a class="nav-link" :class="{ 'text-white jn-deactive': isDarkMode }"
+            href="#scrollspyHeading7">{{currentTexts.nav.Porn}}</a>
+          <a class="nav-link" :class="{ 'text-white jn-deactive': isDarkMode }"
+            href="#scrollspyHeading8">{{currentTexts.nav.ActiveProtect}}</a>
+          <a class="nav-link" :class="{ 'text-white jn-deactive': isDarkMode }"
             href="#scrollspyHeading3">{{currentTexts.nav.WebRTC}}</a>
           <a class="nav-link" :class="{ 'text-white jn-deactive': isDarkMode }"
             href="#scrollspyHeading4">{{currentTexts.nav.DNSLeakTest}}</a>
@@ -199,7 +207,7 @@
         <!-- IP Connectivity -->
         <div class="availability-test-section mb-4">
           <div class="jn-title2">
-            <h2 id="scrollspyHeading2" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.ipConnectivity.Title}}</h2>
+            <h2 id="scrollspyHeading5" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.ipConnectivity.Title}}</h2>
             <button @click="checkAllIPConnectivity"
               :class="['btn', isDarkMode ? 'btn-dark dark-mode-refresh' : 'btn-light']"><i
                 class="bi bi-arrow-clockwise"></i></button>
@@ -226,7 +234,7 @@
         <!-- AdBlock -->
         <div class="availability-test-section mb-4">
           <div class="jn-title2">
-            <h2 id="scrollspyHeading2" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.adblock.Title}}</h2>
+            <h2 id="scrollspyHeading6" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.adblock.Title}}</h2>
             <button @click="checkAllAdBlock"
               :class="['btn', isDarkMode ? 'btn-dark dark-mode-refresh' : 'btn-light']"><i
                 class="bi bi-arrow-clockwise"></i></button>
@@ -253,7 +261,7 @@
         <!-- Porn -->
         <div class="availability-test-section mb-4">
           <div class="jn-title2">
-            <h2 id="scrollspyHeading2" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.porn.Title}}</h2>
+            <h2 id="scrollspyHeading7" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.porn.Title}}</h2>
             <button @click="checkAllPorn"
               :class="['btn', isDarkMode ? 'btn-dark dark-mode-refresh' : 'btn-light']"><i
                 class="bi bi-arrow-clockwise"></i></button>
@@ -280,7 +288,7 @@
         <!-- Security -->
         <div class="availability-test-section mb-4">
           <div class="jn-title2">
-            <h2 id="scrollspyHeading2" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.security.Title}}</h2>
+            <h2 id="scrollspyHeading8" :class="{'mobile-h2' : isMobile }">🚦 {{currentTexts.security.Title}}</h2>
             <button @click="checkAllSecurity"
               :class="['btn', isDarkMode ? 'btn-dark dark-mode-refresh' : 'btn-light']"><i
                 class="bi bi-arrow-clockwise"></i></button>
